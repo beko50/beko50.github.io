@@ -6,7 +6,8 @@
 		$header = $('#header'),
 		$footer = $('#footer'),
 		$main = $('#main'),
-		$main_articles = $main.children('article');
+		$main_articles = $main.children('article'),
+		$scrollTopButton = $('#scrollTopButton');
 
 	// Breakpoints.
 		breakpoints({
@@ -16,6 +17,30 @@
 			small:    [ '480px',   '767px'  ],
 			xsmall:   [ '361px',   '479px'  ],
 			xxsmall:  [ null,      '360px'  ]
+		});
+	
+		// Show the button when scrolled past 60% of the page
+		$window.on('scroll', function() {
+			var scrollPosition = $(this).scrollTop();
+			var documentHeight = $(document).height();
+			var windowHeight = $(this).height();
+			var scrollThreshold = documentHeight * 0.6 - windowHeight;
+	
+			if (documentHeight > windowHeight) {
+				if (scrollPosition >= scrollThreshold) {
+					$scrollTopButton.fadeIn();
+				} else {
+					$scrollTopButton.fadeOut();
+				}
+			} else {
+				$scrollTopButton.fadeOut();
+			}
+		});
+	
+		// Scroll to top when button is clicked
+		$scrollTopButton.on('click', function() {
+			$('html, body').animate({ scrollTop: 0 }, 700);
+			return false;
 		});
 
 	// Play initial animations on page load.
