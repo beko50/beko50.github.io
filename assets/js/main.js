@@ -24,7 +24,7 @@
 			var scrollPosition = $(this).scrollTop();
 			var documentHeight = $(document).height();
 			var windowHeight = $(this).height();
-			var scrollThreshold = documentHeight * 0.6 - windowHeight;
+			var scrollThreshold = documentHeight * 0.4 - windowHeight;
 	
 			if (documentHeight > windowHeight) {
 				if (scrollPosition >= scrollThreshold) {
